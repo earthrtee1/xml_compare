@@ -19,7 +19,7 @@ for i in dict_new.items():
     print(i)
 
 
-tree = ET.parse('test.xml')
+tree = ET.parse('test_old.xml')
 root = tree.getroot()
 
 dict_old = {}
@@ -45,9 +45,20 @@ for k, v in dict_new.items():
         systems_did_not_exist_in_the_old_file.append({k: v})
 
 
-with open("values_were_unchanged.txt", "w")  as file:
-      for i in range(len(values_were_unchanged)):
-        file.write(values_were_unchanged[i])
+with open("values_were_unchanged.csv", "w")  as file:
+    for i in range(len(values_were_unchanged)):
+        for k,v in values_were_unchanged[i].items():
+            file.write("{},  {}".format(k,v) + '\n')
+
+with open("values_were_changed.csv", "w")  as file:
+    for k,v in values_were_changed.items():
+        file.write("{},  {}".format(k,v) + '\n')
+
+with open("systems_did_not_exist_in_the_old_file.csv", "w")  as file:
+    for i in range(len(systems_did_not_exist_in_the_old_file)):
+        for k,v in systems_did_not_exist_in_the_old_file[i].items():
+            file.write("{},  {}".format(k,v) + '\n')
+
 # print(values_were_unchanged)
 # print('\n'*3)
 # print(values_were_changed)
